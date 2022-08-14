@@ -114,7 +114,6 @@ root = Tk()
 root.geometry("350x400")
 root.title("Maze solver")
 root.resizable(False, False)
-# <a href="https://www.flaticon.com/free-icons/maze" title="maze icons">Maze icons created by Freepik - Flaticon</a>
 root.iconbitmap("assets/icons/maze.ico")
 
 open_img_btn = ttk.Button(root, text = "Open Image", command = open_img)
