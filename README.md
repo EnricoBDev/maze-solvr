@@ -8,15 +8,19 @@ The app icon can be found [here](https://www.flaticon.com/free-icons/maze)
 
 First, clone this repository
 
-`git clone https://github.com/EnricoBDev/maze-solver.git`
+``` bash
+git clone https://github.com/EnricoBDev/maze-solver.git
+```
 
 Then install the required dependencies
 
-```
+``` bash
 cd maze-solver
 pip install -r requirements.txt
 ```
 
 To start the program you just need to run
 
-`python gui.py`
+``` python
+python gui.py
+```
