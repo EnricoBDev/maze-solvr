@@ -12,7 +12,6 @@ from create_adj_list import create_adj_list
 from solve import solve
 from img_manipulation import create_gif, draw_path
 
-
 def preview_accepted():
     top_popup.destroy()
     solve_btn["state"] = "normal"
@@ -38,6 +37,7 @@ def open_img():
 
         # creates the window
         top_popup = Toplevel()
+        top_popup.geometry =("+100+100")
         top_popup.iconbitmap("assets/icons/maze.ico")
         top_popup.lift()
         top_popup.focus_force()
@@ -94,7 +94,8 @@ def solve_maze():
             gif_save_path = Path(filename_save_path).stem + ".gif"
 
             finalImage, frames = draw_path(img, filename_save_path, path, list())
-            create_gif(gif_save_path, frames)
+            if isGifCreated.get():
+                create_gif(gif_save_path, frames)
             finalImage.save(filename_save_path)
             img.close()
 
@@ -116,15 +117,17 @@ root.title("Maze solver")
 root.resizable(False, False)
 root.iconbitmap("assets/icons/maze.ico")
 
+isGifCreated = BooleanVar(root)
+
 open_img_btn = ttk.Button(root, text = "Open Image", command = open_img)
 open_img_btn.grid(column = 0, row = 0, padx = (10, 0), pady = (10, 0))
 
-generate_img_btn = ttk.Button(root, text = "Generate Image", command = lambda: print("image generated"))
-generate_img_btn.grid(column = 1, row = 0, padx = (5, 0), pady = (10, 0))
-
 solve_btn = ttk.Button(root, text = "Solve Image", command = solve_maze)
-solve_btn.grid(column = 2, row = 0, padx = (5, 0), pady = (10, 0))
+solve_btn.grid(column = 1, row = 0, padx = (5, 0), pady = (10, 0))
 solve_btn["state"] = "disabled"
 
+checkbox = Checkbutton(root, text = "Generate gif", variable = isGifCreated, onvalue = True, offvalue = False)
+checkbox.grid(column = 2, row = 0, padx = (5, 0), pady = (10, 0))
 
-root.mainloop()
+if __name__ == "__main__":
+    root.mainloop()
