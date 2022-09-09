@@ -3,15 +3,15 @@ from maze import Maze
 from vertex import Vertex
 
 def check_color(img, i, j, maze_matrix):
-    BLACK = [0, 0, 0]
-    WHITE = [255, 255, 255]
-    BLUE = [0, 0, 255]
+    BLACK = (0, 0, 0, 255)
+    WHITE = (255, 255, 255, 255)
+    BLUE = (0, 0, 255, 255)
     if np.array_equal(img[i][j], WHITE):
         maze_matrix[i][j] = 1
     if np.array_equal(img[i][j], BLACK):
         maze_matrix[i][j] = 0      
     if np.array_equal(img[i][j], BLUE):
-        maze_matrix[i][j] = 2     
+        maze_matrix[i][j] = 2   
 
 def create_maze(img):
     rows = len(img)
