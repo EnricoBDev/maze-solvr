@@ -1,10 +1,7 @@
 <h1 align="center">
   <img title='logo' src='assets\icons\mazesolverlogo.png'>
-</h1>
-
-<h2 align='center'>
   A minimal application for solving mazes built with tkinter
-</h2>
+</h1>
 
 <p align='center'>
   <img src='https://img.shields.io/github/last-commit/EnricoBDev/maze-solvr?style=for-the-badge' />
