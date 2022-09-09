@@ -1,8 +1,9 @@
 <h1 align="center">
+  <br>
   <img title='logo' src='assets\icons\mazesolverlogo.png'>
-</h1>
-<h1 align="center">
+  <br>
   A minimal application for solving mazes built with tkinter
+  <br>
 </h1>
 
 <p align='center'>
