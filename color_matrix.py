@@ -30,9 +30,3 @@ def create_maze(img):
         return False
     else:
         return Maze(start_end[0], start_end[1], maze_matrix)
-
-
-# driver code for testing purposes
-# im = Image.open(r"C:\Users\bassi\Documents\PythonScripts\maze_solver\maze.png")
-# array = np.array(im)
-# print(create_maze(array))

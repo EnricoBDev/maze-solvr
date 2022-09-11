@@ -1,16 +1,17 @@
+from pathlib import Path
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 from PIL import ImageTk, Image
-from pathlib import Path
+import os
 import numpy as np
 import subprocess, os, platform
 
 from color_matrix import create_maze
 from create_adj_list import create_adj_list
 from solve import solve
-from img_manipulation import create_full_gif, create_gif, draw_path
+from img_manipulation import create_full_gif, create_gif, draw_path, resize_Image
 
 def preview_accepted():
     top_popup.destroy()
@@ -92,12 +93,11 @@ def solve_maze():
                 title = "Save solved maze"
             )
 
-            gif_save_path = Path(filename_save_path).stem + ".gif"
+            gif_save_path = os.path.splitext(filename_save_path)[0] + ".gif"
             
             RED = (255, 0, 0, 255)
 
             final_Image, solved_frames = draw_path(img, RED, path, list())
-
 
             if is_gif_created.get():
                 frames = create_full_gif(start_img, final_Image, solved_frames, execution_frames)
@@ -108,6 +108,7 @@ def solve_maze():
 
             if platform.system() == "Darwin":       # macOS 
                 subprocess.call(('open', filename_save_path), check=True)
+                final_Image = resize_Image(final_Image)
             elif platform.system() == "Windows":    # windows
                 os.startfile(filename_save_path)
             else:                                   # linux 
@@ -119,6 +120,12 @@ def solve_maze():
 
 def slider_change(event):
     speed_label.configure(text = f"Speed {gif_speed.get():.2f}x")
+
+def enable_loop():
+    if is_gif_created.get():
+        loop_checkbox.configure(state = NORMAL)
+    else:
+        loop_checkbox.configure(state = DISABLED)
 
 root = Tk()
 root.geometry("300x100")
@@ -137,16 +144,16 @@ solve_btn = ttk.Button(root, text = "Solve Image", command = solve_maze)
 solve_btn.grid(column = 1, row = 0, padx = (5, 0), pady = (10, 0))
 solve_btn["state"] = "disabled"
 
-generate_gif_checkbox = ttk.Checkbutton(root, text = "Generate gif", variable = is_gif_created, onvalue = True, offvalue = False)
+generate_gif_checkbox = ttk.Checkbutton(root, text = "Generate gif", variable = is_gif_created, onvalue = True, offvalue = False, command = enable_loop)
 generate_gif_checkbox.grid(column = 2, row = 0, padx = (5, 0), pady = (10, 0))
 
-checkbox = ttk.Checkbutton(root, text = "Loop gif", variable = is_gif_loop, onvalue = 0, offvalue = 1)
-checkbox.grid(column = 2, row = 1, padx = (5, 0))
+loop_checkbox = ttk.Checkbutton(root, text = "Loop gif", variable = is_gif_loop, onvalue = 0, offvalue = 1, state = DISABLED)
+loop_checkbox.grid(column = 2, row = 1, padx = (5, 0))
 
-slider = ttk.Scale(root, from_ = 0.50, to_ = 5, orient = "horizontal", variable = gif_speed, command = slider_change)
+slider = ttk.Scale(root, from_ = 1, to_ = 5, orient = "horizontal", variable = gif_speed, command = slider_change)
 slider.grid(column = 2, row = 2, pady = (6, 0))
 
-speed_label = ttk.Label(root, text = "Speed 0.50x")
+speed_label = ttk.Label(root, text = "Speed 1.00x")
 speed_label.grid(column = 2, row = 2)
 
 

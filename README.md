@@ -16,9 +16,12 @@
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#create-new-mazes">Create New Mazes</a> •
-  <a href="#known-issues">Known Issues</a> •
   <a href="#credits">Credits</a>
 </p>
+
+<h1 align="center">
+  <img title='example' src='assets\example.gif'>
+</h1>
 
 ## Key Features
 
@@ -55,10 +58,6 @@ To create new mazes you can use any image manipulation program, you just need to
 - The start and end points must be indicated with 2 blue ```#0000ff``` pixels
 - The walls/obstacles must be indicated with black ```#000000``` pixels 
 - The navigable paths must be indicated with white ```#ffffff``` pixels
-
-## Known Issues
-
-- At the end of the generated gif a strange bugged image appears
 
 ## Credits
 

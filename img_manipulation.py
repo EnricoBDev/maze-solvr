@@ -46,7 +46,7 @@ def draw_path(image, color, solved_path, frames):
         frames.append(image.convert("RGBA"))
         return draw_path(image, color, solved_path, frames)
     
-    return resize_Image(image), frames
+    return image, frames
 
 def draw_alg_frame(frame, start, end):
 
@@ -87,17 +87,9 @@ def create_full_gif(maze_image, solved_maze_image, solved_frames, execution_fram
 
     full_frames.append(solved_maze_image.convert("RGBA"))             
 
-    return full_frames
+    resized_frames = []
 
+    for i in full_frames:
+        resized_frames.append(resize_Image(i))
 
-# driver code for testing purposes
-# im = Image.open(r"C:\Users\bassi\Documents\PythonScripts\maze_solver\maze.png")
-# array = np.asarray(im)
-# maze = create_maze(array)
-# adj_list = create_adj_list(maze.matrix)
-# print(adj_list)
-# path = solve(maze, adj_list)
-# finalImage = draw_path(im, r"animation", path, 0)
-# finalImage = resize_Image(finalImage)
-# finalImage.save("C:/Users/bassi/Documents/PythonScripts/maze_solver/animation/funzionaporcodio.png")
-# im.close()
+    return resized_frames
